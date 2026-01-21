@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Tvarix</title>
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Protect Route
+        if (!localStorage.getItem('userToken')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+
+<body style="background-color: var(--gray-100);">
+
+    <!-- Navbar -->
+    <nav class="navbar" style="position: sticky;">
+        <div class="container">
+            <div class="navbar-container">
+                <div class="nav-logo-group">
+                    <img src="/logo.png" alt="Tvarix" style="height: 40px; width: auto;">
+                    <span style="font-weight: 700; color: var(--white);">Student Portal</span>
+                </div>
+                <button id="logout-btn" class="nav-link"
+                    style="background: none; border: none; cursor: pointer; color: #ef4444;">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 2rem;">
+
+        <!-- Welcome Header -->
+        <div
+            style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow-md); margin-bottom: 2rem;">
+            <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">Welcome,
+                <span id="user-name">Student</span>!</h1>
+            <p style="color: var(--gray-600); font-size: 1.125rem;">Domain: <span id="user-domain"
+                    style="font-weight: 600; color: var(--secondary);">Loading...</span></p>
+        </div>
+
+        <!-- Task Submission Section -->
+        <div class="contact-form-card" style="background: white; max-width: 800px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Submit Your Tasks</h2>
+                <p style="color: var(--gray-600);">Please submit the GitHub repository or live links for your 5 assigned
+                    tasks.</p>
+            </div>
+
+            <form id="task-form">
+                <div style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
+                            1 Link</label>
+                        <input type="url" name="task1" placeholder="https://github.com/..." class="form-input"
+                            style="width: 100%;">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
+                            2 Link</label>
+                        <input type="url" name="task2" placeholder="https://github.com/..." class="form-input"
+                            style="width: 100%;">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
+                            3 Link</label>
+                        <input type="url" name="task3" placeholder="https://github.com/..." class="form-input"
+                            style="width: 100%;">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
+                            4 Link</label>
+                        <input type="url" name="task4" placeholder="https://github.com/..." class="form-input"
+                            style="width: 100%;">
+                    </div>
+
+                    <div>
+                        <label
+                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
+                            5 Link</label>
+                        <input type="url" name="task5" placeholder="https://github.com/..." class="form-input"
+                            style="width: 100%;">
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn-submit" style="width: 100%;">
+                    Save Task Links
+                </button>
+                <p id="task-msg" style="text-align: center; margin-top: 1rem; font-size: 0.875rem; font-weight: 500;">
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="user.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadUserDashboard);
+    </script>
+</body>
+
+</html>

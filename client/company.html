@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company - Tvarix</title>
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-container">
+                <a href="index.html" class="nav-logo-group">
+                    <img src="/logo.png" alt="Tvarix Logo" class="nav-logo-img">
+                </a>
+
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="solutions.html" class="nav-link">Solutions</a>
+                    <a href="company.html" class="nav-link" style="color: var(--secondary)">Company</a>
+                    <a href="internship.html" class="nav-link">Internship</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </div>
+
+                <button class="mobile-menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu">
+            <div class="flex-col">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="solutions.html" class="mobile-nav-link">Solutions</a>
+                <a href="company.html" class="mobile-nav-link">Company</a>
+                <a href="internship.html" class="mobile-nav-link">Internship</a>
+                <a href="contact.html" class="mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding section-wrapper bg-gray-50" style="margin-top: 80px;">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h2 class="section-title">About Tvarix</h2>
+                    <div class="section-divider" style="margin: 0 0 1.5rem 0"></div>
+                    <p class="about-text">
+                        Tvarix Services is a next-generation service aggregator committed to simplifying access to
+                        verified and skilled professionals. Our platform prioritizes efficiency, trust, and rapid
+                        response, particularly in time-sensitive and emergency scenarios.
+                    </p>
+                    <p class="about-text">
+                        By leveraging technology, Tvarix aims to empower professionals while simultaneously delivering
+                        seamless service experiences to customers. We believe in creating a bridge that adds value to
+                        both service providers and seekers.
+                    </p>
+                </div>
+                <div class="about-img-container">
+                    <div class="about-img-bg"></div>
+                    <div class="about-card">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80"
+                            alt="Team working" class="about-img">
+                        <div class="about-badge hidden">
+                            <p style="font-size: 1.5rem; font-weight: bold; color: var(--secondary)">100%</p>
+                            <p style="font-size: 0.875rem">Verified Professionals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="color: #9ca3af; margin-bottom: 0.5rem">
+                © <span id="current-year"></span> Tvarix Services. All intellectual property rights reserved.
+            </p>
+            <div class="flex justify-center" style="margin-top: 1rem">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

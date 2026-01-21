@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Tvarix</title>
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-container">
+                <a href="index.html" class="nav-logo-group">
+                    <img src="/logo.png" alt="Tvarix Logo" class="nav-logo-img">
+                </a>
+
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link" style="color: var(--secondary)">Home</a>
+                    <a href="solutions.html" class="nav-link">Solutions</a>
+                    <a href="company.html" class="nav-link">Company</a>
+                    <a href="internship.html" class="nav-link">Internship</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="login.html" class="nav-link"
+                        style="color: var(--white); background-color: var(--secondary); padding: 0.5rem 1rem; border-radius: 999px;">Login</a>
+                </div>
+
+                <button class="mobile-menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu">
+            <div class="flex-col">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="solutions.html" class="mobile-nav-link">Solutions</a>
+                <a href="company.html" class="mobile-nav-link">Company</a>
+                <a href="internship.html" class="mobile-nav-link">Internship</a>
+                <a href="contact.html" class="mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                An <span>Intelligent Platform</span><br>
+                Bridging Skilled Professionals with Real-Time Demand
+            </h1>
+            <p class="hero-text">
+                Tvarix is a technology-driven service aggregation ecosystem designed to deliver reliable professionals
+                exactly when and where they are needed.
+            </p>
+            <button class="btn-primary" onclick="window.location.href='solutions.html'">
+                Explore Our Platform
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="color: #9ca3af; margin-bottom: 0.5rem">
+                © <span id="current-year"></span> Tvarix Services. All intellectual property rights reserved.
+            </p>
+            <div class="flex justify-center" style="margin-top: 1rem">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
