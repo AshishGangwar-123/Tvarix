@@ -148,13 +148,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     internshipForm.reset();
                 } else {
                     const text = await res.text();
+                    let errorMessage = text;
                     try {
                         const errorData = JSON.parse(text);
-                        throw new Error(errorData.message || 'Failed to submit');
+                        if (errorData && errorData.message) {
+                            errorMessage = errorData.message;
+                        }
                     } catch (e) {
-                        // If JSON parse fails, use the raw text or status
-                        throw new Error(text || `Server Error (${res.status})`);
+                        // Fallback to raw text if JSON parse fails
                     }
+                    throw new Error(errorMessage || `Server Error (${res.status})`);
                 }
             } catch (err) {
                 console.error(err);

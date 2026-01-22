@@ -53,3 +53,6 @@ The easiest way to deploy is using **Vercel** (Free & Fast).
 2. Click the button above or import your repo in Vercel.
 3. In Vercel Project Settings > Environment Variables, add your `MONGO_URI`.
 4. Your app will be live!
+
+> [!IMPORTANT]
+> The site will NOT work until you add the **MONGO_URI** in Vercel. You can copy it from your local `.env` file.

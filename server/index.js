@@ -47,7 +47,7 @@ app.use(async (req, res, next) => {
     // However, Mongoose buffers, so we'll let it try, but if MONGO_URI was truly missing 
     // connectDB would have logged it.
     if (mongoose.connection.readyState === 0 && !process.env.MONGO_URI) {
-        return res.status(500).json({ message: "Database Configuration Error: MONGO_URI missing" });
+        return res.status(500).json({ message: "Setup Required: Go to Vercel Settings > Environment Variables and add MONGO_URI." });
     }
     next();
 });
