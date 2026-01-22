@@ -38,8 +38,7 @@
             Overview</h1>
 
         <!-- Stats Grid -->
-        <div class="services-grid"
-            style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: 3rem;">
+        <div class="stats-grid">
             <div class="service-card" style="align-items: flex-start; text-align: left; border-top-color: #3b82f6;">
                 <h3 style="color: var(--gray-600); font-size: 1rem;">Total Intern Applications</h3>
                 <p id="stat-interns" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">...</p>
@@ -51,27 +50,20 @@
         </div>
 
         <!-- Create User Section -->
-        <div class="contact-form-card" style="background: white; margin-bottom: 2rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">Create New User</h2>
-            <form id="create-user-form"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
+        <div class="admin-card">
+            <h2 class="section-title-sm">Create New User</h2>
+            <form id="create-user-form" class="create-user-form">
                 <div>
-                    <label
-                        style="display: block; font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">Username</label>
-                    <input type="text" name="username" required
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: 0.5rem;">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" required class="form-input">
                 </div>
                 <div>
-                    <label
-                        style="display: block; font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">Password</label>
-                    <input type="password" name="password" required
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: 0.5rem;">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" required class="form-input">
                 </div>
                 <div>
-                    <label
-                        style="display: block; font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">Domain</label>
-                    <select name="domain" required
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: 0.5rem; background: white;">
+                    <label class="form-label">Domain</label>
+                    <select name="domain" required class="form-input" style="background: white;">
                         <option value="Frontend Development">Frontend Development</option>
                         <option value="Backend Development">Backend Development</option>
                         <option value="Full Stack Development">Full Stack Development</option>
@@ -79,23 +71,23 @@
                         <option value="UI/UX Design">UI/UX Design</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-submit" style="height: 48px;">Create User</button>
+                <button type="submit" class="btn-submit">Create User</button>
             </form>
             <p id="create-user-msg" style="margin-top: 1rem; font-size: 0.875rem; font-weight: 500;"></p>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem;">
+        <div class="admin-grid">
 
             <!-- Student Submissions -->
-            <div class="contact-form-card" style="background: white; grid-column: 1 / -1;">
-                <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">Student Task Submissions</h2>
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+            <div class="admin-card" style="grid-column: 1 / -1;">
+                <h2 class="section-title-sm">Student Task Submissions</h2>
+                <div class="table-wrapper">
+                    <table class="admin-table">
                         <thead>
-                            <tr style="border-bottom: 2px solid var(--gray-100);">
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Student</th>
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Domain</th>
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Task Links</th>
+                            <tr>
+                                <th>Student</th>
+                                <th>Domain</th>
+                                <th>Task Links</th>
                             </tr>
                         </thead>
                         <tbody id="users-table-body">
@@ -106,24 +98,24 @@
             </div>
 
             <!-- Recent Interns -->
-            <div class="contact-form-card" style="background: white;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h2 style="font-size: 1.25rem; font-weight: 700;">Recent Intern Applications</h2>
+            <div class="admin-card">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <h2 class="section-title-sm">Recent Intern Applications</h2>
                     <button onclick="downloadExcel()" class="btn-submit"
                         style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem; background-color: #059669;">
                         Export Excel
                     </button>
                 </div>
-                <!-- ... table ... -->
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                <div class="table-wrapper">
+                    <table class="admin-table">
                         <thead>
-                            <tr style="border-bottom: 2px solid var(--gray-100);">
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Name</th>
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Domain</th>
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Year</th>
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Phone</th>
-                                <th style="padding: 0.75rem; color: var(--gray-600);">Date</th>
+                            <tr>
+                                <th>Name</th>
+                                <th>Domain</th>
+                                <th>Year</th>
+                                <th>Phone</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody id="interns-table-body">
@@ -134,8 +126,8 @@
             </div>
 
             <!-- Recent Contacts -->
-            <div class="contact-form-card" style="background: white;">
-                <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">Recent Messages</h2>
+            <div class="admin-card">
+                <h2 class="section-title-sm">Recent Messages</h2>
                 <div id="contacts-list" style="display: flex; flex-direction: column; gap: 1rem;">
                     <!-- Injected JS -->
                 </div>
