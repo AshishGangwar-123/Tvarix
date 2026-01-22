@@ -147,8 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     msgContainer.style.color = '#059669';
                     internshipForm.reset();
                 } else {
-                    const errorData = await res.json();
-                    throw new Error(errorData.message || 'Failed to submit');
+                    const text = await res.text();
+                    try {
+                        const errorData = JSON.parse(text);
+                        throw new Error(errorData.message || 'Failed to submit');
+                    } catch (e) {
+                        // If JSON parse fails, use the raw text or status
+                        throw new Error(text || `Server Error (${res.status})`);
+                    }
                 }
             } catch (err) {
                 console.error(err);

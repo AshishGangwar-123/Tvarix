@@ -36,7 +36,19 @@ const connectDB = async () => {
 connectDB();
 
 app.use(async (req, res, next) => {
-    await connectDB();
+    try {
+        await connectDB();
+    } catch (err) {
+        console.error("DB Connection Failed in Middleware:", err);
+    }
+
+    // Check state - if not connected, Mongoose ops will hang/timeout.
+    // Better to fail fast if we know it's broken (e.g. bad URI).
+    // However, Mongoose buffers, so we'll let it try, but if MONGO_URI was truly missing 
+    // connectDB would have logged it.
+    if (mongoose.connection.readyState === 0 && !process.env.MONGO_URI) {
+        return res.status(500).json({ message: "Database Configuration Error: MONGO_URI missing" });
+    }
     next();
 });
 
