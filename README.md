@@ -42,3 +42,14 @@ A simple, modern website built with **React** (Frontend), **Node.js/Express** (B
     - Open terminal in `client` folder.
     - Run: `npm run dev`
     - Open browser to: `http://localhost:5173`
+
+## ☁️ Deployment (Vercel)
+
+The easiest way to deploy is using **Vercel** (Free & Fast).
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FYOUR_GITHUB_USERNAME%2FTvarix)
+
+1. Push your code to a GitHub repository.
+2. Click the button above or import your repo in Vercel.
+3. In Vercel Project Settings > Environment Variables, add your `MONGO_URI`.
+4. Your app will be live!
