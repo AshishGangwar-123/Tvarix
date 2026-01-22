@@ -147,10 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     msgContainer.style.color = '#059669';
                     internshipForm.reset();
                 } else {
-                    throw new Error('Failed to submit');
+                    const errorData = await res.json();
+                    throw new Error(errorData.message || 'Failed to submit');
                 }
             } catch (err) {
-                msgContainer.textContent = 'Failed to submit application. Please try again.';
+                console.error(err);
+                msgContainer.textContent = err.message || 'Failed to submit application. Please try again.';
                 msgContainer.style.color = '#dc2626';
             } finally {
                 submitBtn.disabled = false;

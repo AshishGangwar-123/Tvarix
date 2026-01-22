@@ -16,10 +16,29 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client'), { extensions: ['html'] }));
 
 // Database Connection
-console.log('Attempting to connect to MongoDB at:', process.env.MONGO_URI);
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log(err));
+let isConnected = false;
+const connectDB = async () => {
+    if (isConnected) return;
+    try {
+        if (!process.env.MONGO_URI) {
+            console.error('MONGO_URI is missing in environment variables');
+            return;
+        }
+        await mongoose.connect(process.env.MONGO_URI);
+        isConnected = true;
+        console.log('MongoDB Connected');
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// Connect immediately but also ensure connection in middleware
+connectDB();
+
+app.use(async (req, res, next) => {
+    await connectDB();
+    next();
+});
 
 // Routes
 const Service = require('./models/Service');
