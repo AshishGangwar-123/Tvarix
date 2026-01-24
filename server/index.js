@@ -16,30 +16,44 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client'), { extensions: ['html'] }));
 
 // Database Connection
-// Database Connection
+mongoose.set('bufferCommands', false); // Disable buffering to fail fast if not connected
+
+let cachedPromise = null;
+
 const connectDB = async () => {
-    if (mongoose.connection.readyState >= 1) {
+    if (mongoose.connection.readyState === 1) {
         return;
+    }
+
+    if (cachedPromise) {
+        await cachedPromise;
+        if (mongoose.connection.readyState === 1) {
+            return;
+        }
     }
 
     try {
         if (!process.env.MONGO_URI) {
-            console.error('MONGO_URI is missing in environment variables');
-            throw new Error('MONGO_URI is missing');
+            throw new Error('MONGO_URI is missing in environment variables');
         }
-        await mongoose.connect(process.env.MONGO_URI, {
-            maxPoolSize: 10, // Maintain up to 10 socket connections
-            serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
-            socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+
+        cachedPromise = mongoose.connect(process.env.MONGO_URI, {
+            maxPoolSize: 10,
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+            bufferCommands: false, // Ensure internal buffering is off too
         });
+
+        await cachedPromise;
         console.log('MongoDB Connected');
     } catch (err) {
         console.error('MongoDB Connection Error:', err);
+        cachedPromise = null; // Reset promise so we can retry on next request
         throw err;
     }
 };
 
-// Connect immediately but also ensure connection in middleware
+// Connect immediately (fire and forget)
 connectDB().catch(err => console.error("Initial DB Connection Failed:", err));
 
 app.use(async (req, res, next) => {
