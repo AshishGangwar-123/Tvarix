@@ -16,40 +16,40 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client'), { extensions: ['html'] }));
 
 // Database Connection
-let isConnected = false;
+// Database Connection
 const connectDB = async () => {
-    if (isConnected) return;
+    if (mongoose.connection.readyState >= 1) {
+        return;
+    }
+
     try {
         if (!process.env.MONGO_URI) {
             console.error('MONGO_URI is missing in environment variables');
-            return;
+            throw new Error('MONGO_URI is missing');
         }
-        await mongoose.connect(process.env.MONGO_URI);
-        isConnected = true;
+        await mongoose.connect(process.env.MONGO_URI, {
+            maxPoolSize: 10, // Maintain up to 10 socket connections
+            serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+            socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+        });
         console.log('MongoDB Connected');
     } catch (err) {
-        console.log(err);
+        console.error('MongoDB Connection Error:', err);
+        throw err;
     }
 };
 
 // Connect immediately but also ensure connection in middleware
-connectDB();
+connectDB().catch(err => console.error("Initial DB Connection Failed:", err));
 
 app.use(async (req, res, next) => {
     try {
         await connectDB();
+        next();
     } catch (err) {
         console.error("DB Connection Failed in Middleware:", err);
+        res.status(500).json({ message: "Service Unavailable: Database connection failed." });
     }
-
-    // Check state - if not connected, Mongoose ops will hang/timeout.
-    // Better to fail fast if we know it's broken (e.g. bad URI).
-    // However, Mongoose buffers, so we'll let it try, but if MONGO_URI was truly missing 
-    // connectDB would have logged it.
-    if (mongoose.connection.readyState === 0 && !process.env.MONGO_URI) {
-        return res.status(500).json({ message: "Setup Required: Go to Vercel Settings > Environment Variables and add MONGO_URI." });
-    }
-    next();
 });
 
 // Routes
