@@ -48,7 +48,12 @@ app.use(async (req, res, next) => {
         next();
     } catch (err) {
         console.error("DB Connection Failed in Middleware:", err);
-        res.status(500).json({ message: "Service Unavailable: Database connection failed." });
+        // Expose error message for debugging purposes
+        res.status(500).json({
+            message: "Service Unavailable: Database connection failed.",
+            error: err.message,
+            tip: "Check MongoDB Atlas Network Access (IP Whitelist 0.0.0.0/0) and Credentials."
+        });
     }
 });
 
