@@ -167,20 +167,28 @@ async function loadUserDashboard() {
     }
 }
 
-// Individual Task Submission (Saves all current state)
-async function submitSingleTask() {
+// Individual Task Submission
+async function submitSingleTask(btn) {
     const taskForm = document.getElementById('task-form');
     const msg = document.getElementById('task-msg');
-    const btns = taskForm.querySelectorAll('.btn-submit');
 
-    // Disable all buttons temporarily
-    btns.forEach(b => b.disabled = true);
-    msg.textContent = 'Saving...';
-    msg.style.color = 'var(--gray-600)';
+    // Identify associated input (assuming it's the previous sibling in the flex container)
+    // Structure: div > input, button. So input is previousElementSibling.
+    const input = btn.previousElementSibling;
 
-    // Collect all links
+    // Lock the specific input and button
+    btn.disabled = true;
+    input.readOnly = true; // Use readOnly for input to allow copy, or disabled
+    input.disabled = true; // disabled is safer for "closed" visual
+
+    const originalText = btn.innerHTML;
+    btn.innerHTML = 'Saving...';
+    msg.textContent = '';
+
+    // Collect all links (including the one just locked)
     const taskLinks = [];
     for (let i = 1; i <= 5; i++) {
+        // value property is accessible even on disabled inputs
         taskLinks.push(taskForm[`task${i}`].value.trim());
     }
 
@@ -200,19 +208,31 @@ async function submitSingleTask() {
         if (res.ok) {
             msg.textContent = 'Progress saved!';
             msg.style.color = '#10b981';
-            loadUserDashboard(); // Reload to update progress bar
+
+            // Visual feedback for success
+            btn.innerHTML = 'Saved';
+            btn.style.backgroundColor = '#10b981'; // Green
+            btn.style.borderColor = '#10b981';
+
+            // Re-fetch dashboard to update progress bar and certificate status
+            // This will re-set values but shouldn't un-disable the element
+            loadUserDashboard();
         } else {
-            msg.textContent = data.message || 'Failed to save';
-            msg.style.color = '#ef4444';
+            throw new Error(data.message || 'Failed to save');
         }
     } catch (err) {
-        msg.textContent = 'Error connecting to server';
+        msg.textContent = 'Error: ' + err.message;
         msg.style.color = '#ef4444';
+
+        // Re-enable on error
+        btn.disabled = false;
+        input.disabled = false;
+        btn.innerHTML = originalText;
     } finally {
+        // Clear global message after delay
         setTimeout(() => {
-            btns.forEach(b => b.disabled = false);
             msg.textContent = '';
-        }, 2000);
+        }, 3000);
     }
 }
 

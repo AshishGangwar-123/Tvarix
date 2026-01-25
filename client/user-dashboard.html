@@ -21,7 +21,7 @@
     <nav class="navbar" style="position: sticky;">
         <div class="container">
             <div class="navbar-container">
-                <div class="nav-logo-group">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
                     <img src="/logo.png" alt="Tvarix" style="height: 40px; width: auto;">
                     <span style="font-weight: 700; color: var(--white);">Student Portal</span>
                 </div>
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
+        <div class="dashboard-grid">
 
             <!-- Task List (Left Column) -->
             <div>
@@ -89,7 +89,8 @@
                     <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
                         Task 1: Personal Portfolio Website</h3>
                     <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
-                        <strong>Objective:</strong> To understand basic website structure and layout design.</p>
+                        <strong>Objective:</strong> To understand basic website structure and layout design.
+                    </p>
 
                     <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
                     <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
@@ -111,7 +112,8 @@
                     <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
                         Task 2: Product / Service Landing Page</h3>
                     <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
-                        <strong>Objective:</strong> To understand real-world website UI design.</p>
+                        <strong>Objective:</strong> To understand real-world website UI design.
+                    </p>
 
                     <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
                     <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
@@ -133,7 +135,8 @@
                     <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
                         Task 3: Form with JavaScript Validation</h3>
                     <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
-                        <strong>Objective:</strong> To learn JavaScript basics and form handling.</p>
+                        <strong>Objective:</strong> To learn JavaScript basics and form handling.
+                    </p>
 
                     <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
                     <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
@@ -155,7 +158,8 @@
                     <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
                         Task 4: Festival Greeting Web Page</h3>
                     <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
-                        <strong>Objective:</strong> To practice user interaction using JavaScript.</p>
+                        <strong>Objective:</strong> To practice user interaction using JavaScript.
+                    </p>
 
                     <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
                     <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
@@ -177,7 +181,8 @@
                     <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
                         Task 5: Deployed Mini Project</h3>
                     <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
-                        <strong>Objective:</strong> To understand complete frontend development workflow.</p>
+                        <strong>Objective:</strong> To understand complete frontend development workflow.
+                    </p>
 
                     <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
                     <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
@@ -199,7 +204,8 @@
                     <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
                         Task 6: Simple Calculator Web App</h3>
                     <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
-                        <strong>Objective:</strong> To practice basic JavaScript logic.</p>
+                        <strong>Objective:</strong> To practice basic JavaScript logic.
+                    </p>
 
                     <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
                     <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
@@ -221,7 +227,8 @@
                     <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
                         Task 7: Simple Static Web Page</h3>
                     <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
-                        <strong>Objective:</strong> To build confidence in basic HTML & CSS.</p>
+                        <strong>Objective:</strong> To build confidence in basic HTML & CSS.
+                    </p>
 
                     <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
                     <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
@@ -256,7 +263,7 @@
                             <div style="display: flex; gap: 0.5rem;">
                                 <input type="url" name="task1" placeholder="https://github.com/..." class="form-input"
                                     style="flex: 1;">
-                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                <button type="button" onclick="submitSingleTask(this)" class="btn-submit"
                                     style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
                             </div>
                         </div>
@@ -269,7 +276,7 @@
                             <div style="display: flex; gap: 0.5rem;">
                                 <input type="url" name="task2" placeholder="https://github.com/..." class="form-input"
                                     style="flex: 1;">
-                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                <button type="button" onclick="submitSingleTask(this)" class="btn-submit"
                                     style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
                             </div>
                         </div>
@@ -282,7 +289,7 @@
                             <div style="display: flex; gap: 0.5rem;">
                                 <input type="url" name="task3" placeholder="https://github.com/..." class="form-input"
                                     style="flex: 1;">
-                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                <button type="button" onclick="submitSingleTask(this)" class="btn-submit"
                                     style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
                             </div>
                         </div>
@@ -295,7 +302,7 @@
                             <div style="display: flex; gap: 0.5rem;">
                                 <input type="url" name="task4" placeholder="https://github.com/..." class="form-input"
                                     style="flex: 1;">
-                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                <button type="button" onclick="submitSingleTask(this)" class="btn-submit"
                                     style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
                             </div>
                         </div>
@@ -308,7 +315,7 @@
                             <div style="display: flex; gap: 0.5rem;">
                                 <input type="url" name="task5" placeholder="https://github.com/..." class="form-input"
                                     style="flex: 1;">
-                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                <button type="button" onclick="submitSingleTask(this)" class="btn-submit"
                                     style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
                             </div>
                         </div>
