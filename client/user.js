@@ -97,50 +97,145 @@ async function loadUserDashboard() {
     }
 }
 
-// Task Submission
-const taskForm = document.getElementById('task-form');
-if (taskForm) {
-    taskForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = taskForm.querySelector('.btn-submit');
-        const msg = document.getElementById('task-msg');
+// Dashboard Data Loading & Task Submission
+async function loadUserDashboard() {
+    const token = localStorage.getItem('userToken');
+    if (!token) return;
 
-        btn.disabled = true;
-        btn.textContent = 'Saving...';
-        msg.textContent = '';
-
-        // Collect links
-        const taskLinks = [];
-        for (let i = 1; i <= 5; i++) {
-            taskLinks.push(taskForm[`task${i}`].value.trim());
-        }
-
-        try {
-            const token = localStorage.getItem('userToken');
-            const res = await fetch(`${API_BASE}/submit-tasks`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ taskLinks })
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                msg.textContent = 'Tasks saved successfully!';
-                msg.style.color = '#10b981'; // Green
-            } else {
-                msg.textContent = data.message || 'Failed to save tasks';
-                msg.style.color = '#ef4444'; // Red
+    try {
+        const res = await fetch(`${API_BASE}/dashboard`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
             }
-        } catch (err) {
-            msg.textContent = 'Error connecting to server';
-            msg.style.color = '#ef4444';
-        } finally {
-            btn.disabled = false;
-            btn.textContent = 'Save Task Links';
+        });
+
+        if (res.status === 401) {
+            localStorage.removeItem('userToken');
+            window.location.href = 'login.html';
+            return;
         }
-    });
+
+        const user = await res.json();
+
+        // Populate User Info
+        document.getElementById('user-name').textContent = user.username;
+        document.getElementById('user-domain').textContent = user.domain;
+
+        // Populate Task Links & Calculate Progress
+        const form = document.getElementById('task-form');
+        let filledCount = 0;
+
+        if (form && user.taskLinks && Array.isArray(user.taskLinks)) {
+            user.taskLinks.forEach((link, index) => {
+                if (index < 5 && form[`task${index + 1}`]) {
+                    const val = link || '';
+                    form[`task${index + 1}`].value = val;
+                    if (val.trim() !== '') filledCount++;
+                }
+            });
+        }
+
+        // Update Progress Bar
+        const percentage = (filledCount / 5) * 100;
+        document.getElementById('progress-bar').style.width = `${percentage}%`;
+        document.getElementById('progress-text').textContent = `${percentage}%`;
+
+        // Handle Certificate Status
+        const statusEl = document.getElementById('cert-status');
+        const requestBtn = document.getElementById('request-cert-btn');
+
+        if (user.certificateStatus === 'Approved') {
+            statusEl.textContent = 'Certificate Status: Approved ✅';
+            statusEl.style.color = '#10b981';
+            requestBtn.style.display = 'none';
+        } else if (user.certificateStatus === 'Requested') {
+            statusEl.textContent = 'Certificate Status: Requested ⏳';
+            statusEl.style.color = '#f59e0b';
+            requestBtn.style.display = 'none';
+        } else {
+            statusEl.textContent = 'Complete 5 tasks to request certificate';
+            if (percentage === 100) {
+                requestBtn.style.display = 'inline-block';
+                requestBtn.onclick = requestCertificate;
+            } else {
+                requestBtn.style.display = 'none';
+            }
+        }
+
+    } catch (err) {
+        console.error('Data Load Error:', err);
+    }
+}
+
+// Individual Task Submission (Saves all current state)
+async function submitSingleTask() {
+    const taskForm = document.getElementById('task-form');
+    const msg = document.getElementById('task-msg');
+    const btns = taskForm.querySelectorAll('.btn-submit');
+
+    // Disable all buttons temporarily
+    btns.forEach(b => b.disabled = true);
+    msg.textContent = 'Saving...';
+    msg.style.color = 'var(--gray-600)';
+
+    // Collect all links
+    const taskLinks = [];
+    for (let i = 1; i <= 5; i++) {
+        taskLinks.push(taskForm[`task${i}`].value.trim());
+    }
+
+    try {
+        const token = localStorage.getItem('userToken');
+        const res = await fetch(`${API_BASE}/submit-tasks`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ taskLinks })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            msg.textContent = 'Progress saved!';
+            msg.style.color = '#10b981';
+            loadUserDashboard(); // Reload to update progress bar
+        } else {
+            msg.textContent = data.message || 'Failed to save';
+            msg.style.color = '#ef4444';
+        }
+    } catch (err) {
+        msg.textContent = 'Error connecting to server';
+        msg.style.color = '#ef4444';
+    } finally {
+        setTimeout(() => {
+            btns.forEach(b => b.disabled = false);
+            msg.textContent = '';
+        }, 2000);
+    }
+}
+
+// Request Certificate
+async function requestCertificate() {
+    if (!confirm('Are you sure you want to request your certificate? Ensure all 5 tasks are correct.')) return;
+
+    try {
+        const token = localStorage.getItem('userToken');
+        const res = await fetch(`${API_BASE}/request-certificate`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert(data.message);
+            loadUserDashboard(); // Refresh UI
+        } else {
+            alert(data.message || 'Request failed');
+        }
+    } catch (err) {
+        alert('Server Error');
+    }
 }

@@ -152,6 +152,18 @@ async function loadDashboardData() {
                 <tr style="border-bottom: 1px solid var(--gray-100);">
                     <td style="padding: 0.75rem; font-weight: 500;">${u.username}</td>
                     <td style="padding: 0.75rem;">${u.domain}</td>
+                    <td style="padding: 0.75rem;">
+                        <span style="
+                            padding: 0.25rem 0.5rem; 
+                            border-radius: 9999px; 
+                            font-size: 0.75rem; 
+                            font-weight: 600;
+                            background: ${u.certificateStatus === 'Approved' ? '#d1fae5' : u.certificateStatus === 'Requested' ? '#fef3c7' : '#f3f4f6'};
+                            color: ${u.certificateStatus === 'Approved' ? '#065f46' : u.certificateStatus === 'Requested' ? '#b45309' : '#4b5563'};
+                        ">
+                            ${u.certificateStatus || 'Not Requested'}
+                        </span>
+                    </td>
                     <td style="padding: 0.75rem;">${linksHtml}</td>
                 </tr>
             `}).join('');

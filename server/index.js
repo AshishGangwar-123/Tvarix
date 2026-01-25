@@ -232,6 +232,25 @@ app.post('/api/user/submit-tasks', auth, async (req, res) => {
     }
 });
 
+// Request Certificate
+app.post('/api/user/request-certificate', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+
+        // Validation: Must have 5 links
+        const validLinks = user.taskLinks.filter(link => link && link.trim() !== '').length;
+        if (validLinks < 5) {
+            return res.status(400).json({ message: 'Please complete all 5 tasks before requesting a certificate.' });
+        }
+
+        user.certificateStatus = 'Requested';
+        await user.save();
+        res.json({ message: 'Certificate requested successfully!' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 // Protected Admin Data (Dashboard Stats)
 app.get('/api/admin/data', auth, async (req, res) => {
     try {

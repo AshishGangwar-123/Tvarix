@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema({
     taskLinks: {
         type: [String], // Array of 5 URL strings
         default: []
+    },
+    certificateStatus: {
+        type: String,
+        enum: ['Not Requested', 'Requested', 'Approved'],
+        default: 'Not Requested'
     }
 });
 

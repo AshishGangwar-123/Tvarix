@@ -39,70 +39,285 @@
         <div
             style="background: white; padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow-md); margin-bottom: 2rem;">
             <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">Welcome,
-                <span id="user-name">Student</span>!</h1>
+                <span id="user-name">Student</span>!
+            </h1>
             <p style="color: var(--gray-600); font-size: 1.125rem;">Domain: <span id="user-domain"
                     style="font-weight: 600; color: var(--secondary);">Loading...</span></p>
         </div>
 
-        <!-- Task Submission Section -->
-        <div class="contact-form-card" style="background: white; max-width: 800px; margin: 0 auto;">
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Submit Your Tasks</h2>
-                <p style="color: var(--gray-600);">Please submit the GitHub repository or live links for your 5 assigned
-                    tasks.</p>
+        <!-- Progress Section -->
+        <div class="contact-form-card" style="background: white; margin-bottom: 2rem; padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--primary);">Task Progress</h2>
+                <span id="progress-text" style="font-weight: 700; color: var(--secondary);">0%</span>
             </div>
+            <div style="background-color: var(--gray-100); height: 1rem; border-radius: 9999px; overflow: hidden;">
+                <div id="progress-bar"
+                    style="width: 0%; height: 100%; background-color: var(--secondary); transition: width 0.5s ease-in-out;">
+                </div>
+            </div>
+            <div style="text-align: right; margin-top: 1rem;">
+                <p id="cert-status" style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;"></p>
+                <button id="request-cert-btn" class="btn-submit"
+                    style="display: none; background-color: #f59e0b; width: auto; margin-left: auto;">
+                    Request Certificate
+                </button>
+            </div>
+        </div>
 
-            <form id="task-form">
-                <div style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
 
-                    <div>
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
-                            1 Link</label>
-                        <input type="url" name="task1" placeholder="https://github.com/..." class="form-input"
-                            style="width: 100%;">
-                    </div>
+            <!-- Task List (Left Column) -->
+            <div>
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem;">Task List
+                </h2>
 
-                    <div>
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
-                            2 Link</label>
-                        <input type="url" name="task2" placeholder="https://github.com/..." class="form-input"
-                            style="width: 100%;">
-                    </div>
-
-                    <div>
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
-                            3 Link</label>
-                        <input type="url" name="task3" placeholder="https://github.com/..." class="form-input"
-                            style="width: 100%;">
-                    </div>
-
-                    <div>
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
-                            4 Link</label>
-                        <input type="url" name="task4" placeholder="https://github.com/..." class="form-input"
-                            style="width: 100%;">
-                    </div>
-
-                    <div>
-                        <label
-                            style="display: block; font-size: 0.875rem; font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem;">Task
-                            5 Link</label>
-                        <input type="url" name="task5" placeholder="https://github.com/..." class="form-input"
-                            style="width: 100%;">
-                    </div>
-
+                <div
+                    style="background-color: #e0f2fe; border-left: 4px solid var(--secondary); padding: 1rem; margin-bottom: 1.5rem; border-radius: 0.25rem;">
+                    <strong style="color: var(--primary);">Program Rules:</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem; color: var(--gray-700);">
+                        <li>Interns must complete <strong>ANY 5 out of the 7 tasks</strong></li>
+                        <li>Submission must be <strong>ONLY GitHub Repository Link</strong></li>
+                        <li>Clean code & proper README is mandatory</li>
+                    </ul>
                 </div>
 
-                <button type="submit" class="btn-submit" style="width: 100%;">
-                    Save Task Links
-                </button>
-                <p id="task-msg" style="text-align: center; margin-top: 1rem; font-size: 0.875rem; font-weight: 500;">
-                </p>
-            </form>
+                <!-- Iterate Tasks -->
+                <!-- Task 1 -->
+                <div class="task-card"
+                    style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Task 1: Personal Portfolio Website</h3>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
+                        <strong>Objective:</strong> To understand basic website structure and layout design.</p>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
+                    <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>HTML page structure</li>
+                        <li>CSS styling and layouts</li>
+                        <li>Responsive design basics</li>
+                    </ul>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">Requirements:</strong>
+                    <ul style="margin: 0.25rem 0 0 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Sections: Home, About, Skills, Projects, Contact</li>
+                        <li>Clean and responsive layout</li>
+                    </ul>
+                </div>
+
+                <!-- Task 2 -->
+                <div class="task-card"
+                    style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Task 2: Product / Service Landing Page</h3>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
+                        <strong>Objective:</strong> To understand real-world website UI design.</p>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
+                    <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Hero sections & call-to-action design</li>
+                        <li>Content alignment and spacing</li>
+                        <li>User-focused layout</li>
+                    </ul>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">Requirements:</strong>
+                    <ul style="margin: 0.25rem 0 0 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Header, hero section, features, footer</li>
+                        <li>Simple and professional UI</li>
+                    </ul>
+                </div>
+
+                <!-- Task 3 -->
+                <div class="task-card"
+                    style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Task 3: Form with JavaScript Validation</h3>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
+                        <strong>Objective:</strong> To learn JavaScript basics and form handling.</p>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
+                    <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>JavaScript logic building</li>
+                        <li>Form validation techniques</li>
+                        <li>DOM manipulation</li>
+                    </ul>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">Requirements:</strong>
+                    <ul style="margin: 0.25rem 0 0 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Email, password and empty field validation</li>
+                        <li>No page reload on submit</li>
+                    </ul>
+                </div>
+
+                <!-- Task 4 -->
+                <div class="task-card"
+                    style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Task 4: Festival Greeting Web Page</h3>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
+                        <strong>Objective:</strong> To practice user interaction using JavaScript.</p>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
+                    <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>User input handling</li>
+                        <li>Dynamic content generation</li>
+                        <li>Event handling</li>
+                    </ul>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">Requirements:</strong>
+                    <ul style="margin: 0.25rem 0 0 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Ask user name politely</li>
+                        <li>Show personalized greeting message</li>
+                    </ul>
+                </div>
+
+                <!-- Task 5 -->
+                <div class="task-card"
+                    style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Task 5: Deployed Mini Project</h3>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
+                        <strong>Objective:</strong> To understand complete frontend development workflow.</p>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
+                    <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Project structuring</li>
+                        <li>GitHub usage</li>
+                        <li>Live website deployment</li>
+                    </ul>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">Requirements:</strong>
+                    <ul style="margin: 0.25rem 0 0 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Mini project (To-Do, Notes, Converter etc.)</li>
+                        <li>Deploy on GitHub Pages or Netlify</li>
+                    </ul>
+                </div>
+
+                <!-- Task 6 -->
+                <div class="task-card"
+                    style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Task 6: Simple Calculator Web App</h3>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
+                        <strong>Objective:</strong> To practice basic JavaScript logic.</p>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
+                    <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Button click handling</li>
+                        <li>Basic arithmetic logic</li>
+                        <li>DOM updates</li>
+                    </ul>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">Requirements:</strong>
+                    <ul style="margin: 0.25rem 0 0 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Add, subtract, multiply, divide</li>
+                        <li>Simple and clean UI</li>
+                    </ul>
+                </div>
+
+                <!-- Task 7 -->
+                <div class="task-card"
+                    style="background: white; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                    <h3 style="color: var(--secondary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Task 7: Simple Static Web Page</h3>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 0.5rem;">
+                        <strong>Objective:</strong> To build confidence in basic HTML & CSS.</p>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">What You Will Learn:</strong>
+                    <ul style="margin: 0.25rem 0 1rem 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>HTML tags usage</li>
+                        <li>Basic CSS styling</li>
+                        <li>Page structuring</li>
+                    </ul>
+
+                    <strong style="font-size: 0.875rem; color: var(--primary);">Requirements:</strong>
+                    <ul style="margin: 0.25rem 0 0 1.5rem; font-size: 0.875rem; color: var(--gray-600);">
+                        <li>Any topic of your choice</li>
+                        <li>No JavaScript required</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Submission Form (Right Column) -->
+            <div>
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem;">Submit
+                    Tasks</h2>
+                <div class="contact-form-card" style="background: white;">
+                    <p style="margin-bottom: 1.5rem; color: var(--gray-600);">Submit 5 links to complete your
+                        internship.</p>
+
+                    <form id="task-form">
+
+                        <!-- Task 1 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label
+                                style="display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem;">Submission
+                                1</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="url" name="task1" placeholder="https://github.com/..." class="form-input"
+                                    style="flex: 1;">
+                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
+                            </div>
+                        </div>
+
+                        <!-- Task 2 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label
+                                style="display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem;">Submission
+                                2</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="url" name="task2" placeholder="https://github.com/..." class="form-input"
+                                    style="flex: 1;">
+                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
+                            </div>
+                        </div>
+
+                        <!-- Task 3 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label
+                                style="display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem;">Submission
+                                3</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="url" name="task3" placeholder="https://github.com/..." class="form-input"
+                                    style="flex: 1;">
+                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
+                            </div>
+                        </div>
+
+                        <!-- Task 4 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label
+                                style="display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem;">Submission
+                                4</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="url" name="task4" placeholder="https://github.com/..." class="form-input"
+                                    style="flex: 1;">
+                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
+                            </div>
+                        </div>
+
+                        <!-- Task 5 -->
+                        <div style="margin-bottom: 1rem;">
+                            <label
+                                style="display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem;">Submission
+                                5</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="url" name="task5" placeholder="https://github.com/..." class="form-input"
+                                    style="flex: 1;">
+                                <button type="button" onclick="submitSingleTask()" class="btn-submit"
+                                    style="width: auto; padding: 0.5rem 1rem; font-size: 0.875rem;">Save</button>
+                            </div>
+                        </div>
+
+                        <p id="task-msg"
+                            style="text-align: center; margin-top: 1rem; font-size: 0.875rem; font-weight: 500;"></p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

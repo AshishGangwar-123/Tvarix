@@ -45,6 +45,11 @@ body {
     padding: 0 1rem;
 }
 
+.content-offset {
+    margin-top: 100px;
+    /* Standard offset for 85px navbar */
+}
+
 .text-center {
     text-align: center;
 }
@@ -88,7 +93,7 @@ body {
 
 .navbar-container {
     height: 85px;
-    /* Increased to fit 75px logo */
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -99,14 +104,18 @@ body {
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
+    position: absolute;
+    top: -10px;
+    /* Slight offset to vertically center/hang */
+    left: 1rem;
+    z-index: 50;
 }
 
 .nav-logo-img {
 
-    height: 75px;
-    /* 1.5x larger, may overlap navbar lightly */
+    height: 150px;
+    /* 2x larger for mobile */
     width: auto;
-    max-width: 250px;
     object-fit: contain;
     transition: transform 0.3s ease;
 }
@@ -142,6 +151,12 @@ body {
     padding: 0.5rem;
     cursor: pointer;
     display: block;
+    margin-left: auto;
+    /* Push to right */
+    position: relative;
+    /* Ensure z-index works */
+    z-index: 100;
+    /* Ensure clickable over logo */
     /* shown on mobile */
 }
 
@@ -179,6 +194,12 @@ body {
         height: 100px;
     }
 
+    .nav-logo-group {
+        position: static;
+        /* Reset for desktop flex layout */
+        margin-top: 0;
+    }
+
     .nav-logo-img {
         height: 180px;
         /* 1.5x larger */
@@ -200,6 +221,11 @@ body {
 
     .md\:grid-cols-2 {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content-offset {
+        margin-top: 120px;
+        /* Offset for 100px navbar */
     }
 }
 
