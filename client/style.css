@@ -107,7 +107,7 @@ body {
     position: absolute;
     top: -10px;
     /* Slight offset to vertically center/hang */
-    left: 1rem;
+    left: -28px;
     z-index: 50;
 }
 
